@@ -3,6 +3,8 @@ import os
 
 from cell import Cell
 
+ALIVE_REPRESENTATION = '\u25A0' # filled square
+
 class Grid:
     def __init__(self, width = 50, height = 50):
         self.width = width
@@ -75,12 +77,12 @@ class Grid:
     def draw(self):
         os.system('cls' if os.name == 'nt' else 'clear')
 
-        top_line = '+' + '-' * self.width * 2 + '+'
+        top_line = '+' + '-' * (self.width * 2 - 1) + '+'
         print(top_line)
         for i in range(self.height):
             line = '|'
             for j in range(self.width):
-                line = line + ('X' if self.cells[i][j].will_survive else ' ') + '|'
+                line = line + (ALIVE_REPRESENTATION if self.cells[i][j].will_survive else ' ') + '|'
             print(line)
         print(top_line)
         print(' ')
